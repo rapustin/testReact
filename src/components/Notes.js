@@ -1,14 +1,14 @@
 import React, { useState  } from 'react';
 import Axios from "axios";
 
-    
 
-function Notes() {
+
+
+const Notes = () => {
 
     const [loadTitle, setTitle] = useState('');
     const [loadMessage, setMessage] = useState ('');
     const [loadAuthor, setAuthor] = useState ('');
-    
 
     const newNote = () => {
         Axios({
@@ -19,14 +19,21 @@ function Notes() {
                 author:loadAuthor
             },
             url: 'http://192.168.1.135:5000/notas'
-        }).then((res)=>console.log(res));
+        }).then((res)=>{
+            console.log(res) 
+           });
        
     }
 
         
 
     return (
+        
         <div className='container'>
+
+            
+     
+
             <br/>
             <br/>
             <div className="card text-center">

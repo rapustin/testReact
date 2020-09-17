@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import React, {  useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux'
+import { obtenerNotasAccion } from '../redux/notesDuck'
 
 
-function ViewNotes() {
+const ViewNotes = () =>  {
 
-    const [listado, setData] = useState([]);
+    const dispatch = useDispatch()
 
-    const getNotes = () => {
-        Axios({
-            method: 'GET',
-            url: 'http://192.168.1.135:5000/notas'
-        })
-            .then((res) => {
-                setData(res.data);
-            });
-    }
+    const notas = useSelector(store => store.notas.notas)
 
     useEffect(() => {
-        getNotes()
-    },[])
+       
+        
+        dispatch(obtenerNotasAccion())
+        
+    },[dispatch])
 
 
     return (
@@ -36,7 +33,7 @@ function ViewNotes() {
                 </thead>
                 <tbody>
                     {
-                        listado.map(notas => {
+                        notas.map(notas => {
                             return (
                                 <tr key={notas._id}>
                                     <th >{notas.author}</th>
