@@ -22,45 +22,18 @@ const Notes = () => {
     
     const newNote = async ()  => {
         const {id} = user;
-        
+        const token = localStorage.getItem('auth-token')
         try{
-            const token = userData.token;
             
             const config = { headers: {
-                'Content-Type': 'application/json',
                 'x-auth-token':token
             }}
-                          
-
             const newNote = { title:title, message:message, author:author, userId:id};
-            
-
-            await Axios.post('http://192.168.1.135:5000/notas/notas', {newNote,config});
-            
-            
-
+            await Axios.post('http://192.168.1.135:5000/notas/notas', newNote,config);
+            dispatch(obtenerNotasAccion());
         }catch(err){
            
         }
-        
-        
-        
-        
-        
-        
-        // await Axios({
-        //     method:'POST',
-        //     data:{
-        //         title:title,
-        //         message:message,
-        //         author:author,
-        //         userId: user.id
-        //     },
-        //     url: 'http://192.168.1.135:5000/notas/notas/'
-        // }).then((res)=>{
-        //     console.log(res)
-        //    });
-       
     }
 
         

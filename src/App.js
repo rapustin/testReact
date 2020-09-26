@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import Navegation from './components/Navegation';
-// import ViewNotes from './components/ViewNotes';
+import ViewNotes from './components/ViewNotes';
 import Notes from  './components/Notes';
 //redux
 import { Provider } from 'react-redux';
@@ -62,8 +62,8 @@ function App() {
           <UserContext.Provider value={{userData,setUserData}}>
             <Navegation/>
           
-                {/* <Route path='/' exact  component={ViewNotes} />
-                <Route path='/notas' component={ViewNotes} /> */}
+                <Route path='/' exact  component={ViewNotes} />
+                <Route path='/notas' component={ViewNotes} />
                 <Route path='/notas' component={Notes} />
                 <Route path='/register' component={Register} />
                 <Route path='/login' component={Login} />

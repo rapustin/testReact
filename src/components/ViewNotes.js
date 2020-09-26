@@ -20,7 +20,13 @@ const ViewNotes = () =>  {
     },[dispatch])
 
     const deleteNote = async (e) => {
-        await Axios.post('http://192.168.1.135:5000/notas/notas/' + e)
+
+        const token = localStorage.getItem('auth-token')
+        const config = { headers: {
+            'x-auth-token':token
+        }}
+
+        await Axios.delete('http://192.168.1.135:5000/notas/notas/' + e, config)
         dispatch(obtenerNotasAccion())
     }
 

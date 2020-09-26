@@ -24,12 +24,20 @@ export default function notaReducer(state = dataInicial, action){
 // acciones 
 
 export const obtenerNotasAccion = () => async (dispatch) => {
+
+    const token = localStorage.getItem('auth-token')
+
     try {
-        const res = await Axios.get(`http://192.168.1.135:5000/notas/notas`)
+        const config = { headers: {
+            'x-auth-token':token
+        }}
+
+        const res = await Axios.get(`http://192.168.1.135:5000/notas/notas`,config)
         dispatch({
             type: OBTENER_NOTAS_EXITO,
             payload: res.data
             }) 
+            
         } catch (error){
             console.log(error)
     }
