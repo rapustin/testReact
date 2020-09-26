@@ -1,27 +1,65 @@
-import React, { useState  } from 'react';
+import React, { useState,useContext } from 'react';
 import Axios from "axios";
 
+import { useDispatch } from 'react-redux'
+import { obtenerNotasAccion } from '../redux/notesDuck'
 
-
+import UserContext from "../context/UserContext";
 
 const Notes = () => {
+   
 
-    const [loadTitle, setTitle] = useState('');
-    const [loadMessage, setMessage] = useState ('');
-    const [loadAuthor, setAuthor] = useState ('');
+    const dispatch = useDispatch()
 
-    const newNote = () => {
-        Axios({
-            method:'POST',
-            data:{
-                title:loadTitle,
-                message:loadMessage,
-                author:loadAuthor
-            },
-            url: 'http://192.168.1.135:5000/notas'
-        }).then((res)=>{
-            console.log(res) 
-           });
+    const [title, setTitle] = useState('');
+    const [message, setMessage] = useState ('');
+    const [author, setAuthor] = useState ('');
+    
+
+    const { userData} = useContext(UserContext);
+    const user = userData.user;
+   
+    
+    const newNote = async ()  => {
+        const {id} = user;
+        
+        try{
+            const token = userData.token;
+            
+            const config = { headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token':token
+            }}
+                          
+
+            const newNote = { title:title, message:message, author:author, userId:id};
+            
+
+            await Axios.post('http://192.168.1.135:5000/notas/notas', {newNote,config});
+            
+            
+
+        }catch(err){
+           
+        }
+        
+        
+        
+        
+        
+        
+        // await Axios({
+        //     method:'POST',
+        //     data:{
+        //         title:title,
+        //         message:message,
+        //         author:author,
+        //         userId: user.id
+        //     },
+        //     url: 'http://192.168.1.135:5000/notas/notas/'
+        // }).then((res)=>{
+        //     console.log(res)
+        //    });
        
     }
 

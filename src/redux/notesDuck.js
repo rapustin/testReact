@@ -25,7 +25,7 @@ export default function notaReducer(state = dataInicial, action){
 
 export const obtenerNotasAccion = () => async (dispatch) => {
     try {
-        const res = await Axios.get(`http://192.168.1.135:5000/notas`)
+        const res = await Axios.get(`http://192.168.1.135:5000/notas/notas`)
         dispatch({
             type: OBTENER_NOTAS_EXITO,
             payload: res.data
